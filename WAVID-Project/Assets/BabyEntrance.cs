@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class BabyEntrance : MonoBehaviour {
 	public Image foundName;
 	public AudioSource audio;
+	public AudioSource BGaudio;
 
 	public PlayerController playerControl;
 
 	Baby baby;
+
+	bool crossfade = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,17 +23,33 @@ public class BabyEntrance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (crossfade) {
+			if (audio.isPlaying) {
+				BGaudio.volume -= Time.deltaTime;
+				if (BGaudio.volume < 0) {
+					BGaudio.volume = 0;
+				}
+			} else {
+				BGaudio.volume += Time.deltaTime;
+				if (BGaudio.volume > 1) {
+					BGaudio.volume = 1;
+					crossfade = false;
+				}
+			}
+		} 
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name.Equals ("Player") && !baby.isFound) {
+			//print ("what");
 			baby.isFound = true;
-			playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
+			//playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
 			StartCoroutine ("FoundSequence");
 
 			if (!audio.isPlaying) {
+				print ("playAudio");
 				audio.Play();
+				crossfade = true;
 			}
 		}
 	}

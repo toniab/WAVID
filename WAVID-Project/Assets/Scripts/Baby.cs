@@ -38,7 +38,7 @@ public class Baby : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name.Equals ("Player") && !isFound) {
-			isFound = true;
+			//isFound = true;
 			approaching = true;
 			playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
 			if (playerControl.seat_i % 2 == 0) {
