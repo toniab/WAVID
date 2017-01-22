@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
+	public AudioClip bump;
+	public List<AudioClip> squeaks = new List<AudioClip> ();
+	public AudioSource audio;
 
 	public Transform rightProp;
 	public Transform leftProp;
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		audio = GetComponent<AudioSource> ();
 		rb = GetComponent<Rigidbody> ();
 		rightRB = rightProp.GetComponent<Rigidbody> ();
 		leftRB = leftProp.GetComponent<Rigidbody> ();
@@ -94,4 +98,20 @@ public class PlayerController : MonoBehaviour {
 			*/
 				
 	}
+
+	void OnCollisionEnter(Collision other) {
+		print (other.gameObject.name);
+		if (other.gameObject.layer == 8) { // SQUEAK NOISE
+			if (!audio.isPlaying) {
+				audio.clip = squeaks[Random.Range(1, 4) - 1];
+				audio.Play ();
+			}
+		} else if (other.gameObject.layer == 9) { // BUMP NOISE
+			if (!audio.isPlaying) {
+				audio.clip = bump;
+				audio.Play ();
+			}
+		}
+	}
+		
 }

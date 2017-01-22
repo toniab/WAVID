@@ -6,6 +6,7 @@ public class Baby : MonoBehaviour {
 
 	public bool isFound = false;
 	bool approaching;
+	bool againstPlayer = false;
 	Rigidbody rb;
 	public float thrust = 6f;
 
@@ -31,6 +32,7 @@ public class Baby : MonoBehaviour {
 				}
 			}
 			Vector3 relativePos = babySeat.position - transform.position;
+			if (!againstPlayer) //DO LINECAST OR SOMETHING TO SEE IF WOULD PUSH AGAINST PLAYER
 			rb.AddForce(relativePos * thrust);
 			//rb.MovePosition(babySeat.transform.position * Time.deltaTime);
 		}
