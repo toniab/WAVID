@@ -11,7 +11,6 @@ public class Baby : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-		audio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame

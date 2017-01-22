@@ -15,6 +15,7 @@ public class BabyEntrance : MonoBehaviour {
 	void Start () {
 		playerControl = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		baby = GetComponent<Baby> ();
+		audio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
