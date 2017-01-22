@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour {
 	public Transform[] babySeats;
 	public int seat_i;
 
+	public float fartWaitTime;
+	public int numParticlesToEmit;
+	float leftTimer, rightTimer;
+	ParticleSystem wavidParticles;
+
 	// Use this for initialization
 	void Start () {
 		audio = GetComponent<AudioSource> ();
@@ -41,12 +46,19 @@ public class PlayerController : MonoBehaviour {
 
 		leftHand = false;
 		rightHand = false;
+
+		leftTimer = 0f;
+		rightTimer = 0f;
+		wavidParticles = GetComponent<Transform>().GetChild(3).gameObject.GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		float currThrust = thrust;
 		float direction;
+
+		leftTimer -= Time.deltaTime;
+		rightTimer -= Time.deltaTime;
 
 		if (Input.GetKeyDown ("l") || rightHand) { //RIGHT HAND DOWN
 
@@ -63,6 +75,10 @@ public class PlayerController : MonoBehaviour {
 			lastPressed = Paddle.right;
 
 			rightHand = false;
+
+			if(rightTimer>0f)
+				Fart();
+			leftTimer = fartWaitTime;
 
 		} else if (Input.GetKeyDown ("a") || leftHand) { //LEFT HAND DOWN
 
@@ -82,6 +98,10 @@ public class PlayerController : MonoBehaviour {
 			lastPressed = Paddle.left;
 
 			leftHand = false;
+
+			if(leftTimer>0f)
+				Fart();
+			rightTimer = fartWaitTime;
 		}
 			
 	}
@@ -98,6 +118,9 @@ public class PlayerController : MonoBehaviour {
 			});
 			*/
 				
+	}
+	void Fart() {
+		wavidParticles.Emit(numParticlesToEmit);
 	}
 
 	void OnCollisionEnter(Collision other) {
