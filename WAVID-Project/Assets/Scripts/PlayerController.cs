@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour {
 	Rigidbody rightRB;
 	Rigidbody leftRB;
 
+	public Transform xtrmSeatL;
+	public Transform xtrmSeatR;
+	public Transform[] babySeats;
+	public int seat_i;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
@@ -80,12 +85,13 @@ public class PlayerController : MonoBehaviour {
 		rb.AddTorque(torqueVector);
 		rb.AddForce (forceVector);
 
-
+		/*
 		foundBabies.ForEach (delegate(Rigidbody babyRB)
 			{
 				babyRB.AddTorque(torqueVector / 2f);
 				babyRB.AddForce (forceVector / 2f);
 			});
+			*/
 				
 	}
 }
