@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class BabyEntrance : MonoBehaviour {
 	public Image foundName;
+	public ParticleSystem congratsParticles;
+	public Image congratsText;
 	public AudioSource audio;
 	public AudioSource BGaudio;
 
@@ -41,16 +43,8 @@ public class BabyEntrance : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name.Equals ("Player") && !baby.isFound) {
-			//print ("what");
 			baby.isFound = true;
-			//playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
 			StartCoroutine ("FoundSequence");
-
-			if (!audio.isPlaying) {
-				print ("playAudio");
-				audio.Play();
-				crossfade = true;
-			}
 		}
 	}
 
@@ -58,13 +52,22 @@ public class BabyEntrance : MonoBehaviour {
 		// animate its catchphrase
 		// play its particles
 
-		//stop its particles
-		//remove its catchphrase
+		congratsParticles.Play();
 
-		//play its name
-		foundName.enabled = true;
-		yield return new WaitForSeconds(5f);
-		foundName.enabled = false;
+		if (!audio.isPlaying) {
+			audio.Play();
+			crossfade = true;
+		}
+
+
+		congratsText.enabled = true; //show its catchphrase
+		yield return new WaitForSeconds (4f);
+		foundName.enabled = true; //show its name
+
+		yield return new WaitForSeconds (2f);
+		congratsText.enabled = false; //remove its catchphrase
+		yield return new WaitForSeconds(3f);
+		foundName.enabled = false; //remove its name
 
 		yield return null;
 	}
