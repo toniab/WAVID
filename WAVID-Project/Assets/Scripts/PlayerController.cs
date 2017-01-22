@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	public float turnThrust = .2f;
 	public float torque = 1f;
 
+	public bool leftHand, rightHand;
+
 	public List<Rigidbody> foundBabies = new List<Rigidbody>();
 
 	int minTurnCount = 3;
@@ -26,6 +28,9 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		rightRB = rightProp.GetComponent<Rigidbody> ();
 		leftRB = leftProp.GetComponent<Rigidbody> ();
+
+		leftHand = false;
+		rightHand = false;
 	}
 	
 	// Update is called once per frame
@@ -33,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 		float currThrust = thrust;
 		float direction;
 
-		if (Input.GetKeyDown ("l")) { //RIGHT HAND DOWN
+		if (Input.GetKeyDown ("l") || rightHand) { //RIGHT HAND DOWN
 
 			if (lastPressed != Paddle.right && turnCount <= -minTurnCount) { //WERE YOU PREVIOUSLY TURNING LEFT
 				turnCount = 0;
@@ -47,7 +52,9 @@ public class PlayerController : MonoBehaviour {
 			MovePlayer (rightProp.up * torque, transform.forward * currThrust);
 			lastPressed = Paddle.right;
 
-		} else if (Input.GetKeyDown ("a")) { //LEFT HAND DOWN
+			rightHand = false;
+
+		} else if (Input.GetKeyDown ("a") || leftHand) { //LEFT HAND DOWN
 
 			if (lastPressed != Paddle.left && turnCount >= minTurnCount) {
 				turnCount = 0;
@@ -63,6 +70,8 @@ public class PlayerController : MonoBehaviour {
 			//rb.AddTorque(leftProp.up * -torque);
 			//rb.AddForce (transform.forward * currThrust);
 			lastPressed = Paddle.left;
+
+			leftHand = false;
 		}
 			
 	}
