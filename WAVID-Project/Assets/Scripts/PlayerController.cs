@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour {
 		rb.AddTorque(torqueVector);
 		rb.AddForce (forceVector);
 
-		/*
+		/* REUSE THIS IF WE CAN'T GET WAYFINDING AROUND PARENT OR NAV MESH TO WORK.
 		foundBabies.ForEach (delegate(Rigidbody babyRB)
 			{
 				babyRB.AddTorque(torqueVector / 2f);
