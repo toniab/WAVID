@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 
 	public Transform xtrmSeatL;
 	public Transform xtrmSeatR;
+	public Transform xtrmSeatBack;
 	public Transform[] babySeats;
 	public int seat_i;
 
