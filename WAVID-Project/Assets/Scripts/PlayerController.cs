@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour {
 
 		foundBabies.ForEach (delegate(Rigidbody babyRB)
 			{
-				babyRB.AddTorque(torqueVector);
-				babyRB.AddForce (forceVector);
+				babyRB.AddTorque(torqueVector / 2f);
+				babyRB.AddForce (forceVector / 2f);
 			});
 				
 	}

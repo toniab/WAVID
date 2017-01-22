@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Baby : MonoBehaviour {
 
@@ -7,6 +8,9 @@ public class Baby : MonoBehaviour {
 	bool isFound = false;
 	Rigidbody rb;
 	public float thrust = 6f;
+
+	public Image foundName;
+
 
 	public PlayerController playerControl;
 
@@ -29,7 +33,23 @@ public class Baby : MonoBehaviour {
 		if (other.gameObject.name.Equals ("Player") && !isFound) {
 			isFound = true;
 			playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
-			print ("found");
+			StartCoroutine ("FoundSequence");
 		}
+	}
+
+	IEnumerator FoundSequence() {
+		// play its sound
+		// animate its catchphrase
+		// play its particles
+
+		//stop its particles
+		//remove its catchphrase
+
+		//play its name
+		foundName.enabled = true;
+		yield return new WaitForSeconds(5f);
+		foundName.enabled = false;
+
+		yield return null;
 	}
 }
