@@ -12,14 +12,14 @@ public class BabyEntrance : MonoBehaviour {
 
 	public PlayerController playerControl;
 
-	Baby baby;
+	//Baby baby;
 
 	bool crossfade = false;
 
 	// Use this for initialization
 	void Start () {
 		playerControl = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		baby = GetComponent<Baby> ();
+		//baby = GetComponent<Baby> ();
 		audio = GetComponent<AudioSource> ();
 	}
 	
@@ -41,11 +41,12 @@ public class BabyEntrance : MonoBehaviour {
 		} 
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.name.Equals ("Player") && !baby.isFound) {
+	void CongratsBaby() {
+		StartCoroutine ("FoundSequence");
+		/*if (other.gameObject.name.Equals ("Player") && !baby.isFound) {
 			baby.isFound = true;
 			StartCoroutine ("FoundSequence");
-		}
+		}*/
 	}
 
 	IEnumerator FoundSequence() {
@@ -58,8 +59,7 @@ public class BabyEntrance : MonoBehaviour {
 			audio.Play();
 			crossfade = true;
 		}
-
-
+			
 		congratsText.enabled = true; //show its catchphrase
 		yield return new WaitForSeconds (4f);
 		foundName.enabled = true; //show its name

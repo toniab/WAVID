@@ -20,11 +20,13 @@ public class Baby : MonoBehaviour {
 	Vector3 lookAhead = new Vector3();
 	float xtrmSeatsDist;
 
+	BabyEntrance entrance;
+
 	// Use this for initialization
 	void Start () {
 		playerControl = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		rb = GetComponent<Rigidbody> ();
-
+		entrance = GetComponent<BabyEntrance> ();
 		xtrmSeatsDist = Vector3.Distance(playerControl.xtrmSeatL.position,playerControl.xtrmSeatR.position);
 	}
 	
@@ -59,6 +61,7 @@ public class Baby : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name.Equals ("Player") && !isFound) {
 			isFound = true;
+			entrance.StartCoroutine ("FoundSequence");
 			approaching = 0;
 			playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
 			Transform opositeXtrmSeat;
