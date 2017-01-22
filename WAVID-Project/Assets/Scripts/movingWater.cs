@@ -85,6 +85,7 @@ public class movingWater : MonoBehaviour {
 		}
 		else{
 			BasicVertexOscillation ();
+			/*
 			if (Input.GetKeyDown (KeyCode.R)) {
 				//spawn new straight wave
 				spawnNewLine();
@@ -93,6 +94,7 @@ public class movingWater : MonoBehaviour {
 				//spawn new straight wave
 				spawnNewWave();
 			}
+			*/
 		}
 
 		mesh.vertices = waterVertexes;
