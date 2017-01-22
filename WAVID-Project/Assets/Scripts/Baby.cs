@@ -49,10 +49,14 @@ public class Baby : MonoBehaviour {
 				}
 			}
 			relativePos = babySeat.position - transform.position;
-			relativePos = relativePos.normalized;
-			rb.AddForce(relativePos * thrust);
+			if(approaching >= 2 && relativePos.magnitude < veryClose)
+				lookAhead = playerControl.transform.forward;
+			else
+				lookAhead = Vector3.ProjectOnPlane (relativePos, Vector3.up);
 
-			lookAhead = Vector3.ProjectOnPlane (relativePos, Vector3.up);
+			relativePos = relativePos.normalized;
+			rb.AddForce(relativePos * thrust);				
+			
 			transform.forward = Vector3.Lerp (transform.forward, lookAhead, Time.deltaTime * smoothRot);
 			//rb.MovePosition(babySeat.transform.position * Time.deltaTime);
 		}
