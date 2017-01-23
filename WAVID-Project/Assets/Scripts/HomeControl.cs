@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class HomeControl : MonoBehaviour {
 
-	public Text winMsg;
-	public Text almostMsg;
+	public Image winMsg;
+	public Image almostMsg;
+	public Image goHome;
 	public float msgSpan = 3.0f;
 
 	PlayerController playerControl;
@@ -34,6 +35,7 @@ public class HomeControl : MonoBehaviour {
 	IEnumerator KnockHome() {
 
 		if (playerControl.foundBabies.Count >= 5) {
+			goHome.enabled = false;
 			winMsg.enabled = true;
 			yield return new WaitForSeconds (msgSpan);
 			for (int i = 0; i < happyParticles.Length; i++) {
