@@ -9,18 +9,20 @@ public class BabyEntrance : MonoBehaviour {
 	public Image congratsText;
 	public AudioSource audio;
 	public AudioSource BGaudio;
-
+	AudioClip winClip;
 	public PlayerController playerControl;
 
 	//Baby baby;
 
 	bool crossfade = false;
+	public bool lastBaby = false;
 
 	// Use this for initialization
 	void Start () {
 		playerControl = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		//baby = GetComponent<Baby> ();
 		audio = GetComponent<AudioSource> ();
+		winClip = BGaudio.gameObject.GetComponent<GameSounds> ().winningClip;
 	}
 	
 	// Update is called once per frame
@@ -49,6 +51,10 @@ public class BabyEntrance : MonoBehaviour {
 		}*/
 	}
 
+	void PartyHome() {
+		BGaudio.clip = winClip; 
+	}
+
 	IEnumerator FoundSequence() {
 		// animate its catchphrase
 		// play its particles
@@ -68,6 +74,10 @@ public class BabyEntrance : MonoBehaviour {
 		congratsText.enabled = false; //remove its catchphrase
 		yield return new WaitForSeconds(3f);
 		foundName.enabled = false; //remove its name
+
+		if (lastBaby) {
+			PartyHome ();
+		}
 
 		yield return null;
 	}
