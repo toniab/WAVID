@@ -65,9 +65,15 @@ public class Baby : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name.Equals ("Player") && !isFound) {
 			isFound = true;
-			entrance.StartCoroutine ("FoundSequence");
+
 			approaching = 0;
 			playerControl.foundBabies.Add (GetComponent<Rigidbody> ());
+
+			if (playerControl.foundBabies.Count == 5) {
+				entrance.lastBaby = true;
+			}
+			entrance.StartCoroutine ("FoundSequence");
+
 			Transform opositeXtrmSeat;
 			if (playerControl.seat_i % 2 == 0) {
 				babySeat = playerControl.xtrmSeatL;
