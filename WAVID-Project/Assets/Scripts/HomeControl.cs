@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HomeControl : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class HomeControl : MonoBehaviour {
 	public float msgSpan = 3.0f;
 
 	PlayerController playerControl;
+	public ParticleSystem[] happyParticles;
 
 	// Use this for initialization
 	void Start () {		
@@ -33,8 +35,14 @@ public class HomeControl : MonoBehaviour {
 
 		if (playerControl.foundBabies.Count >= 5) {
 			winMsg.enabled = true;
-			
-		} else {
+			yield return new WaitForSeconds (msgSpan);
+			for (int i = 0; i < happyParticles.Length; i++) {
+				happyParticles [i].Play ();			
+			}
+			yield return new WaitForSeconds (2*msgSpan);
+			SceneManager.LoadScene ("Title");
+		} 
+		else {
 			almostMsg.enabled = true;
 			yield return new WaitForSeconds (msgSpan);
 			almostMsg.enabled = false;
