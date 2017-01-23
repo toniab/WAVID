@@ -10,6 +10,7 @@ public class BabyEntrance : MonoBehaviour {
 	public AudioSource audio;
 	public AudioSource BGaudio;
 	AudioClip winClip;
+	public Image canGoHome;
 	public PlayerController playerControl;
 
 	//Baby baby;
@@ -53,6 +54,7 @@ public class BabyEntrance : MonoBehaviour {
 
 	void PartyHome() {
 		BGaudio.clip = winClip; 
+		canGoHome.enabled = true;
 	}
 
 	IEnumerator FoundSequence() {
