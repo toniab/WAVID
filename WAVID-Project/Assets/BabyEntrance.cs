@@ -68,11 +68,10 @@ public class BabyEntrance : MonoBehaviour {
 			
 		congratsText.enabled = true; //show its catchphrase
 		yield return new WaitForSeconds (4f);
+		congratsText.enabled = false; //remove its catchphrase
 		foundName.enabled = true; //show its name
 
-		yield return new WaitForSeconds (2f);
-		congratsText.enabled = false; //remove its catchphrase
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(4f);
 		foundName.enabled = false; //remove its name
 
 		if (lastBaby) {
