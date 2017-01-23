@@ -13,7 +13,7 @@ public class TitleManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.anyKey) {
-			SceneManager.LoadScene ("FinalLevel", LoadSceneMode.Single);
+			SceneManager.LoadScene ("LevelFinal", LoadSceneMode.Single);
 		}
 	}
 }
