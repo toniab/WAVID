@@ -54,6 +54,7 @@ public class BabyEntrance : MonoBehaviour {
 
 	void PartyHome() {
 		BGaudio.clip = winClip; 
+		BGaudio.Play ();
 		canGoHome.enabled = true;
 	}
 

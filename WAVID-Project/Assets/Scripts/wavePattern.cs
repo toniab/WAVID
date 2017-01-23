@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+
 
 public class wavePattern : MonoBehaviour {
 	public int x_size= 3;
